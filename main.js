@@ -63,6 +63,7 @@ function changed(ev) {
   // you should update the code below to instead call getThemProblem.
   // getThemProblem expects a string parameter (the only valid strings are those returned by getOptions), and returns a promise that resolves to a string.
   const they = getThemProblem(you);
+  toggleLoader(you);
   const output = document.getElementById('they');
   output.textContent = they;
 }
