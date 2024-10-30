@@ -18,7 +18,7 @@ function updateRadio(options) {
   form.innerHTML = yous
 }
 
-// this ends the little bit you shoudln't need to edit.
+// this ends the little bit you shouldn't need to edit.
 ///////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ function init(ev) {
   // FIXME: notice above that getYous just returns a literal.
   // you should update the code below to instead call getOptions.
   // getOptions expects no arguments, and returns a promise that resolves to an array of strings.
-  const options = getYous()
+  const options = getOptions()
   updateRadio(options)
 
   document.querySelectorAll("input[type='radio']").forEach((input) => {
@@ -62,7 +62,7 @@ function changed(ev) {
   // FIXME: notice above that getThemProblem just returns a literal.
   // you should update the code below to instead call getThemProblem.
   // getThemProblem expects a string parameter (the only valid strings are those returned by getOptions), and returns a promise that resolves to a string.
-  const they = getThey(you)
+  const they = getThemProblem(you)
   const output = document.getElementById('they')
   output.textContent = they
 }
