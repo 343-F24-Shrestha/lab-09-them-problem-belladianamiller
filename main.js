@@ -49,7 +49,7 @@ function init(ev) {
   // getOptions expects no arguments, and returns a promise that resolves to an array of strings.
   const options = getOptions()
   updateRadio(options);
-
+  toggleLoader(options);
   document.querySelectorAll("input[type='radio']").forEach((input) => {
     input.addEventListener('change', changed);
   })
