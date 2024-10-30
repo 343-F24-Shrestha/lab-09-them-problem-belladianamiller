@@ -1,5 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-// you shouldn't need to edit this first little bit
 function toggleLoader(subject) {
   document.getElementById(`${subject}-loader`).classList.toggle('hidden');
 }
@@ -18,13 +16,6 @@ function updateRadio(options) {
   form.innerHTML = yous;
 }
 
-// this ends the little bit you shouldn't need to edit.
-///////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////
-// below is code that you may need to edit
-
-
 function getYous() {
   return ["poppin'", "packin'"];
 }
@@ -41,33 +32,38 @@ function getThey(you) {
   return result;
 }
 
+async function init(ev) {
+  try {
+    toggleLoader('you');
 
-function init(ev) {
+    const options = await getOptions();
+    updateRadio(options);
 
-  // FIXME: notice above that getYous just returns a literal.
-  // you should update the code below to instead call getOptions.
-  // getOptions expects no arguments, and returns a promise that resolves to an array of strings.
-  const options = getOptions()
-  updateRadio(options);
+    toggleLoader('you');
 
-  document.querySelectorAll("input[type='radio']").forEach((input) => {
-    input.addEventListener('change', changed);
-  })
+    document.querySelectorAll("input[type='radio']").forEach((input) => {
+      input.addEventListener('change', changed);
+    });
+  } catch (error) {
+    console.error('Error loading options:', error);
+  }
 }
 
-function changed(ev) {
-  console.debug('fyi, this is what a change event looks like', ev);
-  const you = ev.target.parentElement.textContent;
+async function changed(ev) {
+  try {
+    console.debug('fyi, this is what a change event looks like', ev);
+    const you = ev.target.parentElement.textContent;
 
-  toggleLoader('you');
-  // FIXME: notice above that getThemProblem just returns a literal.
-  // you should update the code below to instead call getThemProblem.
-  // getThemProblem expects a string parameter (the only valid strings are those returned by getOptions), and returns a promise that resolves to a string.
-  const they = getThemProblem(you);
+    toggleLoader('they');
 
-  toggleLoader('they');
+    const they = await getThemProblem(you);
 
-  const output = document.getElementById('they');
-  output.textContent = they;
+    toggleLoader('they');
+
+    const output = document.getElementById('they');
+    output.textContent = they;
+  } catch (error) {
+    console.error('Error loading "they" state:', error);
+  }
 }
 document.addEventListener("DOMContentLoaded", init);

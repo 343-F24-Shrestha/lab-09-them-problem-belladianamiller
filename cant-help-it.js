@@ -28,9 +28,6 @@ function getThemProblem(you) {
     "happy": "crappy",
     "glad": "mad",
     "thrivin'": "sad",
-    "goody": "moody",
-    "happy": "sappy",
-    "game": "shame",
   }
 
   const result = new Promise((resolve, reject) => {
